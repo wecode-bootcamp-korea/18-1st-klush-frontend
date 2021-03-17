@@ -1,1 +1,128 @@
-.
+@import "../../Styles/common.scss";
+
+.container {
+  height: 100%;
+  padding-top: 160px;
+
+  section {
+    width: 600px;
+    margin: auto;
+    .loginInfo {
+      padding: 20px 0;
+      display: flex;
+      justify-content: center;
+    }
+    h2 {
+      font-size: 28px;
+      font-weight: 700;
+    }
+    .loginSort {
+      padding: 55px 0;
+      display: flex;
+      justify-content: center;
+      ul {
+        width: 250px;
+        margin: 0 10px;
+        display: flex;
+        justify-content: space-around;
+        li {
+          font-size: 18px;
+          border-bottom: 1px solid black;
+          font-weight: 600;
+        }
+
+        .nonSelected {
+          cursor: pointer;
+          color: #8f8f8f;
+          border-bottom: 1px solid gray;
+        }
+      }
+    }
+    .loginForm {
+      .login {
+        width: 330px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+
+        .loginInput {
+          width: 100%;
+          margin: 0px auto;
+          display: flex;
+          flex-direction: column;
+          .loginInputId,
+          .loginInputPwd {
+            position: relative;
+            .inputIcon {
+              position: absolute;
+              top: 21px;
+              left: 13px;
+            }
+          }
+          input::-webkit-input-placeholder {
+            text-align: center;
+            color: $elseGrey;
+            font-weight: 600;
+          }
+          input {
+            border: 1px solid$lushBlack;
+            padding: 15px;
+            margin: 5px 0px;
+            width: 100%;
+            text-align: center;
+          }
+        }
+
+        .saveId {
+          margin: 10px 0 0;
+          input[type="checkbox"] {
+            transform: scale(1.5);
+          }
+          label {
+            margin-left: 5px;
+            font-size: 14px;
+            color: $elseGrey;
+            font-weight: 600;
+          }
+        }
+      }
+      #btnLogin {
+        padding: 15px;
+        margin: 20px 0 0;
+        color: white;
+        background-color: $lushBlack;
+        border: none;
+        font-size: 16px;
+        font-weight: 1000;
+      }
+      .loginMenu {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        margin: 20px 0 0;
+        button {
+          position: relative;
+          background: transparent;
+          border: none;
+
+          em {
+            color: $elseGrey;
+            font-weight: 600;
+          }
+        }
+        #btnFindPwd:before,
+        #btnFindId:before {
+          position: absolute;
+          top: 50%;
+          left: -2px;
+          display: block;
+          width: 1px;
+          height: 10px;
+          margin-top: -5px;
+          background: #8f8f8f;
+          content: "";
+        }
+      }
+    }
+  }
+}
