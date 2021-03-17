@@ -4,15 +4,32 @@ import { FaUserAlt } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
 
 class Login extends Component {
-  constructor() {
-    super();
-    this.state = {
-      id: "",
-      pw: "",
-    };
-  }
+  state = {
+    email: "",
+    password: "",
+  };
+
+  handleOnChange = e => {
+    console.log("name : " + e.target.name);
+    console.log("value : " + e.target.value);
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  loginSubmit = e => {
+    e.preventDefault();
+    const idCheck = /^[A-Za-z0-9][A-Za-z0-9._-]+[@]{1}[a-z]+[.]{1}[a-z]{1,4}$/;
+    if (!this.state.email) {
+      alert("아이디를 입력해주세요");
+    } else if (!idCheck.test(this.state.email)) {
+      alert("입력된 아이디은(는) 잘못된 형식입니다.");
+    } else if (this.state.password === "") {
+      alert("패스워드를 입력해주세요");
+    }
+  };
   render() {
-    const { id, pw } = this.state;
+    const { email, password } = this.state;
     return (
       <div className="container">
         <section>
@@ -32,7 +49,13 @@ class Login extends Component {
               <div className="login">
                 <div className="loginInput">
                   <div className="loginInputId">
-                    <input type="text" id="id" placeholder="아이디" />
+                    <input
+                      type="text"
+                      id="id"
+                      name="email"
+                      placeholder="이메일"
+                      onChange={this.handleOnChange}
+                    />
                     <div className="inputIcon">
                       <FaUserAlt />
                     </div>
@@ -41,7 +64,9 @@ class Login extends Component {
                     <input
                       type="password"
                       id="password"
+                      name="password"
                       placeholder="비밀번호"
+                      onChange={this.handleOnChange}
                     />
                     <div className="inputIcon">
                       <FaLock />
@@ -52,7 +77,7 @@ class Login extends Component {
                   <input type="checkbox" className="checkBox" />
                   <label for="checkBox">아이디 저장</label>
                 </div>
-                <button id="btnLogin">
+                <button id="btnLogin" type="submit" onClick={this.loginSubmit}>
                   <em>로그인 </em>
                 </button>
                 <div className="loginMenu">
