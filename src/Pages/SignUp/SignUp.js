@@ -1,10 +1,74 @@
 import React, { Component } from "react";
+import DaumPostcode from "react-daum-postcode";
 import "./SignUp.scss";
 
 class SignUp extends Component {
+  state = {
+    emailValue: "",
+    isemail: false,
+    passwordValue: "",
+    ispassword: false,
+    repasswordValue: "",
+    isrepassword: false,
+    nameValue: "",
+    isname: false,
+    phoneVlaue: "",
+    isphone: false,
+    zoneCode: "",
+    fullAddress: "",
+    isDaumPost: false,
+    isRegister: false,
+    register: [],
+  };
+
+  handleOpenPost = () => {
+    this.setState({
+      isDaumPost: true,
+    });
+  };
+
+  handleAddress = data => {
+    let AllAddress = data.address;
+    let extraAddress = "";
+    let zoneCodes = data.zonecode;
+    if (data.addressType === "R") {
+      if (data.bname !== "") {
+        extraAddress += data.bname;
+      }
+      if (data.buildingName !== "") {
+        extraAddress +=
+          extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
+      }
+      AllAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
+    }
+    this.setState({
+      fullAddress: AllAddress,
+      zoneCode: zoneCodes,
+    });
+  };
   render() {
+    const { isModalShow, isModalClose } = this.props;
+    const {
+      name,
+      phone,
+      address,
+      isDaumPost,
+      fullAddress,
+      zoneCode,
+      isRegister,
+    } = this.state;
+    const width = 595;
+    const height = 450;
+    const modalStyle = {
+      position: "fixed",
+      top: "100px",
+      left: "300px",
+      zIndex: "100",
+      border: "1px solid #000000",
+      overflow: "hidden",
+    };
     return (
-      <div className="container">
+      <div className="signUp">
         <div className="join">
           <div className="joinStep">
             <div className="stepTitle">
@@ -20,79 +84,29 @@ class SignUp extends Component {
           </div>
           <div className="tableTitle">
             <h3>기본정보</h3>
-            <p>■ 표시는 반드시 입력하셔야 하는 항목입니다.</p>
+            <div className="titleRight">
+              <div className="token">■</div>
+              <div className="titleInfo">
+                표시는 반드시 입력하셔야 하는 항목입니다.
+              </div>
+            </div>
           </div>
           <div className="tableSignUp">
             <table>
               <colgroup>
-                <col width="25%"></col>
-                <col width="75%"></col>
+                <col width="25%" />
+                <col width="75%" />
               </colgroup>
               <tbody>
                 <tr>
-                  <th class="tableRow one">
-                    <div class="token">■</div>
-                    <div> 아이디</div>
-                  </th>
-                  <td>
-                    <div className="textField">
-                      <input type="text" className="text"></input>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <th class="tableRow two">
-                    <div class="token">■</div>
-                    <div> 비밀번호</div>
-                  </th>
-                  <td>
-                    <div className="textField">
-                      <input type="text" className="text"></input>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <th class="tableRow three">
-                    <div class="token">■</div>
-                    <div>비밀번호 확인</div>
-                  </th>
-                  <td>
-                    <div className="textField">
-                      <input type="text" className="text"></input>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <th class="tableRow four">
-                    <div class="token">■</div>
-                    <div>이름</div>
-                  </th>
-                  <td>
-                    <div className="textField">
-                      <input type="text" className="text"></input>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <th class="tableRow five">
-                    <div class="token"> </div>
-                    <div>닉네임</div>
-                  </th>
-                  <td>
-                    <div className="textField">
-                      <input type="text" className="text"></input>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <th class="tableRow six">
-                    <div class="token">■</div>
+                  <th className="tableRow  ">
+                    <div className="token">■</div>
                     <div>이메일</div>
                   </th>
                   <td>
                     <div className="textFieldEmail">
                       <input type="text" className="textEmail"></input>
-                      <select class="email">
+                      <select className="email">
                         <option value="insert" selected="selected">
                           직접입력
                         </option>
@@ -112,8 +126,53 @@ class SignUp extends Component {
                   </td>
                 </tr>
                 <tr>
-                  <th class="tableRow seven">
-                    <div class="token">■</div>
+                  <th className="tableRow  ">
+                    <div className="token">■</div>
+                    <div> 비밀번호</div>
+                  </th>
+                  <td>
+                    <div className="textField">
+                      <input type="text" className="text"></input>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <th className="tableRow  ">
+                    <div className="token">■</div>
+                    <div>비밀번호 확인</div>
+                  </th>
+                  <td>
+                    <div className="textField">
+                      <input type="text" className="text"></input>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <th className="tableRow  ">
+                    <div className="token">■</div>
+                    <div>이름</div>
+                  </th>
+                  <td>
+                    <div className="textField">
+                      <input type="text" className="text"></input>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <th className="tableRow  ">
+                    <div className="token"> </div>
+                    <div>닉네임</div>
+                  </th>
+                  <td>
+                    <div className="textField">
+                      <input type="text" className="text"></input>
+                    </div>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th className="tableRow  ">
+                    <div className="token">■</div>
                     <div>휴대폰번호</div>
                   </th>
                   <td>
@@ -127,18 +186,37 @@ class SignUp extends Component {
                   </td>
                 </tr>
                 <tr>
-                  <th class="tableRow six">
-                    <div class="token"></div>
+                  <th className="tableRow">
+                    <div className="token"></div>
                     <div>주소</div>
                   </th>
                   <td>
                     <div className="textFieldAddress">
-                      <input type="text" className="text"></input>
-                      <button>우편번호검색</button>
-                    </div>
-                    <div className="textFieldAddressMore">
-                      <input type="text" className="adressMore"></input>
-                      <input type="text" className="adressMore"></input>
+                      <div className="textFieldAddressTop">
+                        <input
+                          className="inputAddress"
+                          type="text"
+                          value={zoneCode}
+                        />
+                        <input
+                          type="button"
+                          className="inputAddressButton"
+                          onClick={this.handleOpenPost}
+                          value="우편번호 검색"
+                        />
+                      </div>
+                      <div className="textFieldAddressBottom">
+                        <div>
+                          <input
+                            className="inputAddressBottom"
+                            type="text"
+                            value={fullAddress}
+                          />
+                        </div>
+                        <div className="addressDetail">
+                          <input type="text" className="inputAddressBottom" />
+                        </div>
+                      </div>
                     </div>
                   </td>
                 </tr>
@@ -147,8 +225,18 @@ class SignUp extends Component {
           </div>
         </div>
         <div className="dividerBottom"></div>
-        <div class="btn">
+        <div className="btn">
           <button className="btnSignUp">회원가입</button>
+          {isDaumPost ? (
+            <DaumPostcode
+              onComplete={this.handleAddress}
+              autoClose
+              width={width}
+              height={height}
+              style={modalStyle}
+              isDaumPost={isDaumPost}
+            />
+          ) : null}
         </div>
       </div>
     );

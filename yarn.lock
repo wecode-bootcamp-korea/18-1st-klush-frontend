@@ -9583,6 +9583,14 @@
     "regenerator-runtime" "^0.13.7"
     "whatwg-fetch" "^3.4.1"
 
+"react-daum-postcode@^2.0.5":
+  "integrity" "sha512-BwYDmZaCyV0ruetsaaAv4VpnT5hfJ0PcNAy3AY7u+qFwEVSpW1sqSYepl8zO80VFyFkNMBKeXXVg6Dk+EDIdBA=="
+  "resolved" "https://registry.npmjs.org/react-daum-postcode/-/react-daum-postcode-2.0.5.tgz"
+  "version" "2.0.5"
+  dependencies:
+    "prop-types" "^15.6.2"
+    "react" "^16.4.2"
+
 "react-dev-utils@^11.0.3":
   "integrity" "sha512-dx0LvIGHcOPtKbeiSUM4jqpBl3TcY7CDjZdfOIcKeznE7BWr9dg0iPG90G5yfVQ+p/rGNMXdbfStvzQZEVEi4A=="
   "resolved" "https://registry.npmjs.org/react-dev-utils/-/react-dev-utils-11.0.4.tgz"
@@ -9749,6 +9757,15 @@
   dependencies:
     "loose-envify" "^1.1.0"
     "object-assign" "^4.1.1"
+
+"react@^16.4.2":
+  "integrity" "sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g=="
+  "resolved" "https://registry.npmjs.org/react/-/react-16.14.0.tgz"
+  "version" "16.14.0"
+  dependencies:
+    "loose-envify" "^1.1.0"
+    "object-assign" "^4.1.1"
+    "prop-types" "^15.6.2"
 
 "read-pkg-up@^1.0.1":
   "integrity" "sha1-nWPBMnbAZZGNV/ACpX9AobZD+wI="

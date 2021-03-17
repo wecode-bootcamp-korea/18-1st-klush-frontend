@@ -1,14 +1,17 @@
 @import "../../Styles/common.scss";
 
-.container {
+.signUp {
   height: 100%;
   padding-top: 160px;
   margin: 0 0 100px;
+
   .join {
     width: 1100px;
     margin: 0px auto;
+
     .joinStep {
       padding: 40px 0 100px;
+
       .stepTitle {
         display: flex;
         justify-content: center;
@@ -22,6 +25,7 @@
         padding: 47px 0 0;
         display: flex;
         justify-content: center;
+
         span {
           font-size: 16px;
           font-weight: 700;
@@ -38,13 +42,20 @@
       justify-content: space-between;
       padding: 0 0 20px;
       border-bottom: 1px solid $lushBlack;
+      .titleRight {
+        display: flex;
+        .token {
+          margin: 10px 5px 0 0;
+          color: #cc2020;
+        }
+        .titleInfo {
+          margin-top: 12px;
+          font-size: 13px;
+          font-weight: bold;
+        }
+      }
       h3 {
         font-size: 28px;
-        font-weight: 600;
-      }
-      p {
-        margin-top: 12px;
-        font-size: 13px;
         font-weight: 600;
       }
     }
@@ -57,13 +68,16 @@
       .tableRow {
         display: flex;
         font-size: 14px;
+
         .token {
           margin-right: 6px;
           font-size: 10px;
+          color: #cc2020;
         }
       }
       .textField {
         margin: 20px 15px 0;
+
         input {
           width: 400px;
         }
@@ -71,6 +85,7 @@
       .textFieldEmail {
         display: flex;
         margin: 20px 15px 0;
+
         input {
           margin-right: 10px;
           width: 270px;
@@ -90,6 +105,7 @@
       .textFieldPhone {
         display: flex;
         margin: 20px 15px 0;
+
         input {
           width: 400px;
         }
@@ -104,10 +120,20 @@
       }
       .textFieldAddress {
         display: flex;
-        margin: 20px 15px 0;
+        flex-direction: column;
         input {
+          margin: 10px 0 0;
+        }
+        margin: 10px 15px 0;
+        .inputAddress {
           margin-right: 10px;
           width: 270px;
+        }
+
+        .inputAddressButton {
+          width: 120px;
+          background: transparent;
+          border: 1px solid $lushBlack;
         }
         button {
           padding: 0 18px;
@@ -115,12 +141,15 @@
           outline: none;
           border: 1px solid $elseGrey;
         }
+        .inputAddressBottom {
+          width: 330px;
+        }
       }
-      .textFieldAddressMore {
+      .textFieldAddressBottom {
         display: flex;
-        margin: 20px 15px 0;
-        input {
-          margin-right: 10px;
+
+        .addressDetail {
+          margin-left: 5px;
         }
       }
     }
@@ -135,6 +164,7 @@
     width: 100%;
     display: flex;
     justify-content: center;
+
     .btnSignUp {
       padding: 20px 113px;
       background-color: $lushBlack;
