@@ -100,7 +100,14 @@
         .label {
           font-size: 11px;
           margin: auto;
+          padding-right: 50px;
         }
+      }
+
+      .emailAlert {
+        color: red;
+        font-size: 13px;
+        margin-left: 13px;
       }
       .textFieldPhone {
         display: flex;
@@ -116,6 +123,7 @@
         .label {
           font-size: 11px;
           margin: auto;
+          padding-right: 50px;
         }
       }
       .textFieldAddress {
@@ -173,3 +181,9 @@
     }
   }
 }
+
+// is호ㅓㅣ원가입버튼눌렀는지 = false
+
+// submit시 =>
+
+// className = {isSubmitClicked ? "basic requd ": basic} 

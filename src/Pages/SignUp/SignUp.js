@@ -4,29 +4,47 @@ import "./SignUp.scss";
 
 class SignUp extends Component {
   state = {
+    id: 1,
     emailValue: "",
-    isemail: false,
+    // isemail: false,
     passwordValue: "",
-    ispassword: false,
-    repasswordValue: "",
-    isrepassword: false,
-    nameValue: "",
-    isname: false,
+    // ispassword: false,
+    rePasswordValue: "",
+    // isrepassword: false,
+    nickname: "",
+    // isname: false,
     phoneVlaue: "",
-    isphone: false,
+    // isphone: false,
+    isSubmitClicked: false,
     zoneCode: "",
     fullAddress: "",
     isDaumPost: false,
     isRegister: false,
-    register: [],
+    // register: [],
   };
 
+  handleInputChange = e => {
+    const emailCheck = /^[A-Za-z0-9][A-Za-z0-9._-]+[@]{1}[a-z]+[.]{1}[a-z]{1,4}$/;
+    if (
+      e.target.name === "email" &&
+      emailCheck.test(e.target.value) === false
+    ) {
+      console.log("good");
+    }
+  };
+  // 이메일 check logic
+  emailCheck = () => {
+    this.state.emailValue.include("@") && this.state.emailValue.includes(".");
+  };
+
+  // passwordCheck = () => {
+  //   this.state.passwordValue.length > 10;
+  // };
   handleOpenPost = () => {
     this.setState({
       isDaumPost: true,
     });
   };
-
   handleAddress = data => {
     let AllAddress = data.address;
     let extraAddress = "";
@@ -46,16 +64,41 @@ class SignUp extends Component {
       zoneCode: zoneCodes,
     });
   };
+  checkPassword = () => {
+    if (this.state.password !== this.state.rePassword) {
+      console.log(this.state.password);
+      console.log(this.staterePassword);
+      alert("비밀번호 일치 x");
+    }
+  };
+  signUpFinish = () => {
+    fetch("http://10.58.4.173/user/login'", {
+      method: "POST",
+      body: JSON.stringify({
+        username: this.state.email,
+        password: this.state.password,
+      }),
+    })
+      .then(res => res.json())
+      .then(result => {
+        console.log({ result });
+        if (result.message === "SUCCESS") {
+          alert("회원가입 성공");
+          this.props.history.push("/login");
+        } else {
+          alert("필수 사항을 입력하세요22");
+        }
+      });
+  };
   render() {
-    const { isModalShow, isModalClose } = this.props;
     const {
-      name,
-      phone,
-      address,
+      // name,
+      // phone,
+      // address,
       isDaumPost,
       fullAddress,
       zoneCode,
-      isRegister,
+      // isRegister,
     } = this.state;
     const width = 595;
     const height = 450;
@@ -103,6 +146,7 @@ class SignUp extends Component {
                     <div className="token">■</div>
                     <div>이메일</div>
                   </th>
+
                   <td>
                     <div className="textFieldEmail">
                       <input type="text" className="textEmail"></input>
@@ -123,10 +167,13 @@ class SignUp extends Component {
                         정보/이벤트 메일 수신에 동의합니다.
                       </label>
                     </div>
+                    {this.state.emailValue ? null : (
+                      <div className="emailAlert">필수항목 입니다.</div>
+                    )}
                   </td>
                 </tr>
                 <tr>
-                  <th className="tableRow  ">
+                  <th className="tableRow">
                     <div className="token">■</div>
                     <div> 비밀번호</div>
                   </th>
@@ -137,7 +184,7 @@ class SignUp extends Component {
                   </td>
                 </tr>
                 <tr>
-                  <th className="tableRow  ">
+                  <th className="tableRow">
                     <div className="token">■</div>
                     <div>비밀번호 확인</div>
                   </th>
@@ -148,7 +195,7 @@ class SignUp extends Component {
                   </td>
                 </tr>
                 <tr>
-                  <th className="tableRow  ">
+                  <th className="tableRow">
                     <div className="token">■</div>
                     <div>이름</div>
                   </th>
@@ -159,7 +206,7 @@ class SignUp extends Component {
                   </td>
                 </tr>
                 <tr>
-                  <th className="tableRow  ">
+                  <th className="tableRow">
                     <div className="token"> </div>
                     <div>닉네임</div>
                   </th>
@@ -169,9 +216,8 @@ class SignUp extends Component {
                     </div>
                   </td>
                 </tr>
-
                 <tr>
-                  <th className="tableRow  ">
+                  <th className="tableRow">
                     <div className="token">■</div>
                     <div>휴대폰번호</div>
                   </th>
@@ -226,7 +272,9 @@ class SignUp extends Component {
         </div>
         <div className="dividerBottom"></div>
         <div className="btn">
-          <button className="btnSignUp">회원가입</button>
+          <button className="btnSignUp" onClick={this.signUpFinish}>
+            회원가입
+          </button>
           {isDaumPost ? (
             <DaumPostcode
               onComplete={this.handleAddress}

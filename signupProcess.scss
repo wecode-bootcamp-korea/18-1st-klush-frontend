@@ -1,0 +1,116 @@
+.signupProcessComponent {
+    width: 700px;
+    margin: 0 auto;
+    padding: 50px 0;
+    //depth2
+    form {
+      display: flex;
+      justify-content: left;
+      .baseInputBox {
+        width: 700px;
+        margin-bottom: 20px;
+        h3 {
+          display: inline-block;
+          margin-right: 380px;
+          margin-bottom: 40px;
+        }
+        span {
+          font-size: 12px;
+          text-align: left;
+        }
+        .baseInformation {
+          table {
+            width: 700px;
+            colgroup {
+            }
+            tbody {
+              tr:first-child {
+                border-top: 2px solid #B3B1B1;
+              }
+              tr {
+                border-bottom: 1px solid #DCDCDC;
+                th {
+                  background: #FBFBFB;
+                  padding: 20px 25px;
+                  font-size: 12px;
+                  font-weight: 800;
+                  text-align: left;
+                  span {
+                  }
+                }
+                td {
+                  padding: 10px 25px;
+                  div {
+                    margin-bottom: 5px;
+                    input {
+                      outline: none;
+                      border: 1px solid #D6D6D6;
+                      height: 31px;
+                      width: 350px;
+                    }
+                    select {
+                      width: 100px;
+                      height: 35px;
+                    }
+                    .inputAddressButton {
+                      width: 100px;
+                      height: 35px;
+                      background: white;
+                      color: black;
+                      outline: none;
+                      border: 1px solid black;
+                    }
+                    .inputEmail {
+                      width: 240px;
+                      margin-right: 10px;
+                    }
+                    .inputAddress {
+                      width: 240px;
+                      margin-right: 10px;
+                    }
+                    .inputAddressBottom {
+                      margin-top: 5px;
+                    }
+                  }
+                  .jsEmail {
+                  }
+                  .formElement {
+                    text-align: left;
+                    input {
+                      width: 12px;
+                      height: 12px;
+                    }
+                    label {
+                      font-size: 10px;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    //depth2
+    .btnFinalBox {
+      text-align: center;
+      .btnMemberCancel {
+        width: 150px;
+        height: 45px;
+        color: #3E3D3C;
+        font-weight: bold;
+        cursor: pointer;
+        background: #fff;
+        border: 1px solid #CCCCCC;
+        margin-right: 10px;
+      }
+      .btnMemberJoin {
+        width: 150px;
+        height: 45px;
+        color: #fff;
+        font-weight: bold;
+        cursor: pointer;
+        background: black;
+      }
+    }
+  }
