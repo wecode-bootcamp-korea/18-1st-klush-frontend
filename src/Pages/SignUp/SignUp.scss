@@ -83,29 +83,30 @@
         }
       }
       .textFieldEmail {
+        height: 40px;
         display: flex;
         margin: 20px 15px 0;
-
-        input {
+        .textEmail {
+          width: 290px;
           margin-right: 10px;
-          width: 270px;
         }
-        .email {
-          width: 122px;
+        .label {
+          display: flex;
         }
         .checkBox {
-          margin: auto;
+          margin: auto 0;
           width: 30px;
         }
         .label {
           font-size: 11px;
-          margin: auto;
+          margin: auto 0;
+          display: flex;
           padding-right: 50px;
         }
       }
 
       .emailAlert {
-        color: red;
+        color: #cc2020;
         font-size: 13px;
         margin-left: 13px;
       }
@@ -181,9 +182,3 @@
     }
   }
 }
-
-// is호ㅓㅣ원가입버튼눌렀는지 = false
-
-// submit시 =>
-
-// className = {isSubmitClicked ? "basic requd ": basic} 
