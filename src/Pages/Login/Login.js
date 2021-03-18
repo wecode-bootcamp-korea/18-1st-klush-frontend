@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import "./Login.scss";
 import { FaUserAlt } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
+import "./Login.scss";
 
 class Login extends Component {
   state = {
@@ -26,7 +26,19 @@ class Login extends Component {
       alert("입력된 아이디은(는) 잘못된 형식입니다.");
     } else if (this.state.password === "") {
       alert("패스워드를 입력해주세요");
+      return;
     }
+    // fetch("http://10.58.23.162:80000/user/login", {
+    //   method: "POST",
+    //   body: JSON.stringify({
+    //     username: this.state.email,
+    //     password: this.state.password,
+    //   }),
+    // })
+    //   .then(res => res.json())
+    //   .then(res => {
+    //     console.log(res);
+    //   });
   };
   render() {
     const { email, password } = this.state;
@@ -39,7 +51,9 @@ class Login extends Component {
           <div className="loginBox">
             <div className="loginSort">
               <ul>
-                <li>회원</li>
+                <li className="Selected">
+                  <span>비회원</span>
+                </li>
                 <li className="nonSelected">
                   <span>비회원</span>
                 </li>
@@ -56,9 +70,7 @@ class Login extends Component {
                       placeholder="이메일"
                       onChange={this.handleOnChange}
                     />
-                    <div className="inputIcon">
-                      <FaUserAlt />
-                    </div>
+                    <FaUserAlt className="inputIcon" />
                   </div>
                   <div className="loginInputPwd">
                     <input
@@ -68,28 +80,30 @@ class Login extends Component {
                       placeholder="비밀번호"
                       onChange={this.handleOnChange}
                     />
-                    <div className="inputIcon">
-                      <FaLock />
-                    </div>
+                    <FaLock className="inputIcon" />
                   </div>
                 </div>
                 <div className="saveId">
                   <input type="checkbox" className="checkBox" />
                   <label for="checkBox">아이디 저장</label>
                 </div>
-                <button id="btnLogin" type="submit" onClick={this.loginSubmit}>
+                <button
+                  className="btnLogin"
+                  type="submit"
+                  onClick={this.loginSubmit}
+                >
                   <em>로그인 </em>
                 </button>
                 <div className="loginMenu">
-                  <button id="btnSignup">
+                  <button className="btnSignup">
                     <em>회원가입</em>
                   </button>
                   <div className="divider"></div>
-                  <button id="btnFindId">
+                  <button className="btnFindId">
                     <em>아이디 찾기 </em>
                   </button>
                   <div className="divider"></div>
-                  <button id="btnFindPwd">
+                  <button className="btnFindPwd">
                     <em>비밀번호 찾기 </em>
                   </button>
                 </div>
