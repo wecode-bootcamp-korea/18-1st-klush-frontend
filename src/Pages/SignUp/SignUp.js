@@ -23,15 +23,7 @@ class SignUp extends Component {
     this.setState({
       [e.target.name]: e.target.value,
     });
-    console.log(this.state);
   };
-  // const emailCheck = /^[A-Za-z0-9][A-Za-z0-9._-]+[@]{1}[a-z]+[.]{1}[a-z]{1,4}$/;
-  // if (
-  //   e.target.name === "emailValue" &&
-  //   emailCheck.test(e.target.value) === false
-  // ) {
-  //   console.log("good");
-  // }
 
   handleOpenPost = () => {
     this.setState({
@@ -58,10 +50,10 @@ class SignUp extends Component {
     });
   };
 
-  signUpFinish = e => {
+  onCheck = e => {
     e.preventDefault();
     const emailCheck = /^[A-Za-z0-9][A-Za-z0-9._-]+[@]{1}[a-z]+[.]{1}[a-z]{1,4}$/;
-
+    console.log(this.state.passwordValue.length);
     if (this.state.emailValue === "") {
       alert("이메일을 입력 해 주세요");
       return;
@@ -78,30 +70,37 @@ class SignUp extends Component {
       alert("비밀번호 확인을 입력 해 주세요");
       return;
     }
-    if (!this.state.passwordValue.length < 10) {
+    if (this.state.passwordValue.length < 10) {
       alert("비밀번호 길이를 10자리 이상으로 입력해 주세요");
       return;
     }
-    // if (this.state.passwordValue !== this.state.rePasswordValue) {
-    //   alert("비밀번호와 비밀번호 확인을 체크");
-    // }
+    this.signUpFinish();
+  };
+  signUpFinish = () => {
+    const {
+      emailValue,
+      passwordValue,
+      name,
+      phoneVlaue,
+      addressValue,
+    } = this.state;
+    //    console.log("회원가입 정보 전송");
     fetch("http://10.58.2.56:8888/user/sign-up", {
       method: "POST",
-      // 비구조 할당은 나중에
       body: JSON.stringify({
-        email: this.state.emailValue,
-        password: this.state.passwordValue,
-        name: this.state.name,
-        phoneVlaue: this.state.phoneVlaue,
-        addressValue: this.state.addressValue,
+        email: emailValue,
+        password: passwordValue,
+        name: name,
+        phoneVlaue: phoneVlaue,
+        addressValue: addressValue,
       }),
     })
       .then(res => res.json())
       .then(res => {
         console.log("연결");
-        if (res.message === "성공") {
+        if (res.message === "SUCCESS") {
           alert("회원가입 성공");
-          this.props.history.push("/Login");
+          this.props.history.push("/login");
         } else {
           alert("필수사항 입력 부탁");
         }
@@ -119,9 +118,10 @@ class SignUp extends Component {
       border: "1px solid #000000",
       overflow: "hidden",
     };
+    const { handleInputChange, onCheck } = this;
     return (
       <div className="signUp">
-        <div className="join">
+        <form className="join" method="post">
           <div className="joinStep">
             <div className="stepTitle">
               <h2>JOIN US</h2>
@@ -161,7 +161,7 @@ class SignUp extends Component {
                         type="text"
                         className="textEmail"
                         name="emailValue"
-                        onChange={this.handleInputChange}
+                        onChange={handleInputChange}
                       ></input>
 
                       <select className="email">
@@ -194,7 +194,7 @@ class SignUp extends Component {
                         type="text"
                         className="text"
                         name="passwordValue"
-                        onChange={this.handleInputChange}
+                        onChange={handleInputChange}
                       ></input>
                     </div>
                   </td>
@@ -210,7 +210,7 @@ class SignUp extends Component {
                         type="text"
                         className="text"
                         name="rePasswordValue"
-                        onChange={this.handleInputChange}
+                        onChange={handleInputChange}
                       ></input>
                     </div>
                   </td>
@@ -226,7 +226,7 @@ class SignUp extends Component {
                         type="text"
                         className="text"
                         name="name"
-                        onChange={this.handleInputChange}
+                        onChange={handleInputChange}
                       ></input>
                     </div>
                   </td>
@@ -242,7 +242,7 @@ class SignUp extends Component {
                         type="text"
                         name="nickname"
                         className="text"
-                        onChange={this.handleInputChange}
+                        onChange={handleInputChange}
                       ></input>
                     </div>
                   </td>
@@ -258,7 +258,7 @@ class SignUp extends Component {
                         type="text"
                         name="phoneValue"
                         className="text"
-                        onChange={this.handleInputChange}
+                        onChange={handleInputChange}
                       ></input>
                       <input type="checkBox" className="checkBox" />
                       <label for="checkBox" className="label">
@@ -293,7 +293,7 @@ class SignUp extends Component {
                             className="inputAddressBottom"
                             type="text"
                             value={fullAddress}
-                            onClick={this.handleInputChange}
+                            onClick={handleInputChange}
                           />
                         </div>
                         <div className="addressDetail">
@@ -306,10 +306,10 @@ class SignUp extends Component {
               </tbody>
             </table>
           </div>
-        </div>
+        </form>
         <div className="dividerBottom"></div>
         <div className="btn">
-          <button className="btnSignUp" onClick={this.SignGo}>
+          <button className="btnSignUp" onClick={onCheck}>
             회원가입
           </button>
           {isDaumPost ? (
