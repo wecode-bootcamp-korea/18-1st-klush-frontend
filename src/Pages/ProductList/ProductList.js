@@ -91,7 +91,7 @@ class ProductList extends Component {
   clickClose = modal => {
     this.setState({
       [modal]: !this.state[modal],
-      cartCountNum: "1",
+      cartCountNum: 1,
     });
   };
 
@@ -122,8 +122,9 @@ class ProductList extends Component {
           item => item.product_id === this.state.productId
         )[0].name,
         category: "배쓰밤",
-        quantity: this.state.cartCountNum,
+        quantity: Number(this.state.cartCountNum),
         price: this.state.cartProductPrice,
+        isChecked: true,
       })
     );
     // let token = localStorage.getItem("token");

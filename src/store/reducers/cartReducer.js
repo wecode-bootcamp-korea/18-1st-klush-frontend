@@ -78,7 +78,7 @@ export default function cartReducer(state = INITIAL_STATE, action) {
         ...state,
         cartList: state.cartList.map(item =>
           item.id === action.payload.id
-            ? { ...item, quantity: item.quantity + 1 }
+            ? { ...item, quantity: Number(item.quantity + 1) }
             : item
         ),
       };
@@ -93,11 +93,11 @@ export default function cartReducer(state = INITIAL_STATE, action) {
         ),
       };
     case DELETE:
-      if (
-        window.confirm(
-          `선택하신  ${state.cartList.length}개 상품을 장바구니에서 삭제 하시겠습니까?`
-        )
-      );
+      const countItems = state.cartList
+        .map(check => Number(check.isChecked))
+        .reduce((acc, cur) => acc + cur);
+      alert(`${countItems}개 상품이 장바구니에서 삭제 되었습니다.`);
+
       return {
         ...state,
         cartList: state.cartList.filter(item => !item.isChecked),
